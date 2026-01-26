@@ -21,43 +21,43 @@ public abstract class Car {
 
     // === Publika getters (användaren får läsa men inte ändra) ===
 
-    public int getNrDoors() {
+    protected int getNrDoors() {
         return nrDoors;                   // Returnerar antal dörrar
     }
 
-    public double getEnginePower() {
+    protected double getEnginePower() {
         return enginePower;               // Returnerar motoreffekten
     }
 
-    public double getCurrentSpeed() {
+    protected double getCurrentSpeed() {
         return currentSpeed;              // Returnerar nuvarande hastighet
     }
 
-    public Color getColor() {
+    protected Color getColor() {
         return color;                     // Returnerar bilens färg
     }
 
-    public String getModelName() {
+    protected String getModelName() {
         return modelName;                 // Returnerar modellnamnet
     }
 
-    public void setColor(Color clr) {
+    protected void setColor(Color clr) {
         color = clr;                      // Tillåter användaren att ändra färg
     }
 
     // === Motorhantering ===
 
-    public void startEngine() {
+    protected void startEngine() {
         currentSpeed = 0.1;               // Startar motorn med en liten fart
     }
 
-    public void stopEngine() {
+    protected void stopEngine() {
         currentSpeed = 0;                 // Stänger av motorn helt
     }
 
     // === Gas och broms ===
 
-    public void gas(double amount) {
+    protected void gas(double amount) {
         // Säkerhetskontroll: amount måste vara mellan 0 och 1
         if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException("Amount must be between 0 and 1");
@@ -65,7 +65,7 @@ public abstract class Car {
         incrementSpeed(amount);           // Ökar hastigheten
     }
 
-    public void brake(double amount) {
+    protected void brake(double amount) {
         // Samma säkerhetskontroll som gas
         if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException("Amount must be between 0 and 1");
@@ -75,7 +75,7 @@ public abstract class Car {
 
     // === Abstrakt metod som subklasser måste implementera ===
 
-    public abstract double speedFactor();
+    protected abstract double speedFactor();
     // Varje biltyp har sin egen acceleration → därför abstract.
 
     // === Skyddade metoder för hastighetsändring ===
