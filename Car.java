@@ -90,38 +90,3 @@ public abstract class Car {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 }
-public class Volvo240 extends Car {
-    private final double trimFactor = 1.25; // Trimfaktor för Volvo240
-
-    public Volvo240() {
-        super(4, 100, Color.pink, "Volvo240"); // Anropar baskonstruktorn
-    }
-
-    @Override
-    public double speedFactor() {
-        return getEnginePower() * 0.01 * trimFactor; // Beräknar speedFactor
-    }
-}
-
-public class Saab95 extends Car {
-    private boolean turboOn; // Turbo status
-
-    public Saab95() {
-        super(2, 125, Color.red, "Saab95"); // Anropar baskonstruktorn
-        turboOn = false;                    // Turbo är avstängd som standard
-    }
-
-    public void setTurboOn() {
-        turboOn = true;                     // Sätter turbo på
-    }
-
-    public void setTurboOff() {
-        turboOn = false;                    // Sätter turbo av
-    }
-
-    @Override
-    public double speedFactor() {
-        double turbo = turboOn ? 1.3 : 1.0; // Turbo påverkar speedFactor
-        return getEnginePower() * 0.01 * turbo;
-    }
-}

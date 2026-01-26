@@ -1,5 +1,6 @@
 import java.awt.*;
 
+/*
 public class Volvo240{
 
     public final static double trimFactor = 1.25;
@@ -64,5 +65,19 @@ public class Volvo240{
     // TODO fix this method according to lab pm
     public void brake(double amount){
         decrementSpeed(amount);
+    }
+}
+    */
+
+public class Volvo240 extends Car {
+    private final double trimFactor = 1.25; // Trimfaktor för Volvo240
+
+    public Volvo240() {
+        super(4, 100, Color.pink, "Volvo240"); // Anropar baskonstruktorn
+    }
+
+    @Override
+    public double speedFactor() {
+        return getEnginePower() * 0.01 * trimFactor; // Beräknar speedFactor
     }
 }
