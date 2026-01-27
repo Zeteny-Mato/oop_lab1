@@ -9,6 +9,13 @@ public abstract class Car {
     private double currentSpeed;  // Bilens nuvarande hastighet
     private Color color;          // Bilens färg
     private String modelName;     // Modellnamn
+    
+    // Position
+    protected double x = 0;
+    protected double y = 0;
+
+    // Riktning: 0 = Norr, 1 = Öst, 2 = Söder, 3 = Väst
+    protected int direction = 0;
 
     // === Konstruktor (protected → bara subklasser får använda den) ===
     protected Car(int nrDoors, double enginePower, Color color, String modelName) {
@@ -21,43 +28,43 @@ public abstract class Car {
 
     // === Publika getters (användaren får läsa men inte ändra) ===
 
-    protected int getNrDoors() {
+    public int getNrDoors() {
         return nrDoors;                   // Returnerar antal dörrar
     }
 
-    protected double getEnginePower() {
+    public double getEnginePower() {
         return enginePower;               // Returnerar motoreffekten
     }
 
-    protected double getCurrentSpeed() {
+    public double getCurrentSpeed() {
         return currentSpeed;              // Returnerar nuvarande hastighet
     }
 
-    protected Color getColor() {
+    public Color getColor() {
         return color;                     // Returnerar bilens färg
     }
 
-    protected String getModelName() {
+    public String getModelName() {
         return modelName;                 // Returnerar modellnamnet
     }
 
-    protected void setColor(Color clr) {
+    public void setColor(Color clr) {
         color = clr;                      // Tillåter användaren att ändra färg
     }
 
     // === Motorhantering ===
 
-    protected void startEngine() {
+    public void startEngine() {
         currentSpeed = 0.1;               // Startar motorn med en liten fart
     }
 
-    protected void stopEngine() {
+    public void stopEngine() {
         currentSpeed = 0;                 // Stänger av motorn helt
     }
 
     // === Gas och broms ===
 
-    protected void gas(double amount) {
+    public void gas(double amount) {
         // Säkerhetskontroll: amount måste vara mellan 0 och 1
         if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException("Amount must be between 0 and 1");
@@ -65,7 +72,7 @@ public abstract class Car {
         incrementSpeed(amount);           // Ökar hastigheten
     }
 
-    protected void brake(double amount) {
+    public void brake(double amount) {
         // Samma säkerhetskontroll som gas
         if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException("Amount must be between 0 and 1");
@@ -75,7 +82,7 @@ public abstract class Car {
 
     // === Abstrakt metod som subklasser måste implementera ===
 
-    protected abstract double speedFactor();
+    public abstract double speedFactor();
     // Varje biltyp har sin egen acceleration → därför abstract.
 
     // === Skyddade metoder för hastighetsändring ===
@@ -88,5 +95,25 @@ public abstract class Car {
     protected void decrementSpeed(double amount) {
         // Minskar hastigheten men aldrig under 0
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
+    }
+
+    @Ovveride
+    public void move() {
+        switch (direction) {
+            case 0 -> y += currentSpeed; // Norr
+            case 1 -> x += currentSpeed; // Öst
+            case 2 -> y -= currentSpeed; // Söder
+            case 3 -> x -= currentSpeed; // Väst
+        }
+    }
+
+    @Override
+    public void turnLeft() {
+        direction = (direction + 3) % 4; // 0→3, 1→0, 2→1, 3→2
+    }
+
+    @Override
+    public void turnRight() {
+        direction = (direction + 1) % 4; // 0→1, 1→2, 2→3, 3→0
     }
 }
