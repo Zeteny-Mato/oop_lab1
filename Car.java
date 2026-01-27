@@ -1,7 +1,7 @@
 import java.awt.*;  
 // Importerar Color-klassen så vi kan använda färger på bilarna.
 
-public abstract class Car {
+public abstract class Car implements Movable {
     // === Fält (privata för inkapsling) ===
 
     private int nrDoors;          // Antal dörrar på bilen
@@ -97,7 +97,7 @@ public abstract class Car {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 
-    @Ovveride
+    @Override
     public void move() {
         switch (direction) {
             case 0 -> y += currentSpeed; // Norr
