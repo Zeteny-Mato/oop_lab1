@@ -2,7 +2,7 @@ import java.awt.*;
 // Importerar Color-klassen så vi kan använda färger på bilarna.
 
 public abstract class Car implements Movable {
-    // === Fält (privata för inkapsling) ===
+    //  Fält (privata för inkapsling) 
 
     private int nrDoors;          // Antal dörrar på bilen
     private double enginePower;   // Motorns maxeffekt
@@ -17,7 +17,7 @@ public abstract class Car implements Movable {
     // Riktning: 0 = Norr, 1 = Öst, 2 = Söder, 3 = Väst
     protected int direction = 0;
 
-    // === Konstruktor (protected → bara subklasser får använda den) ===
+    //  Konstruktor (protected → bara subklasser får använda den) 
     protected Car(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;           // Sätter antal dörrar
         this.enginePower = enginePower;   // Sätter motoreffekten
@@ -26,7 +26,7 @@ public abstract class Car implements Movable {
         stopEngine();                     // Alla bilar startar med avstängd motor
     }
 
-    // === Publika getters (användaren får läsa men inte ändra) ===
+    //  Publika getters (användaren får läsa men inte ändra) 
 
     protected int getNrDoors() {
         return nrDoors;                   // Returnerar antal dörrar
@@ -64,7 +64,7 @@ public abstract class Car implements Movable {
         color = clr;                      // Tillåter användaren att ändra färg
     }
 
-    // === Motorhantering ===
+    //  Motorhantering 
 
     protected void startEngine() {
         currentSpeed = 0.1;               // Startar motorn med en liten fart
@@ -74,7 +74,7 @@ public abstract class Car implements Movable {
         currentSpeed = 0;                 // Stänger av motorn helt
     }
 
-    // === Gas och broms ===
+    //  Gas och broms 
 
     protected void gas(double amount) {
         // Säkerhetskontroll: amount måste vara mellan 0 och 1
@@ -92,12 +92,12 @@ public abstract class Car implements Movable {
         decrementSpeed(amount);           // Minskar hastigheten
     }
 
-    // === Abstrakt metod som subklasser måste implementera ===
+    // Abstrakt metod som subklasser måste implementera 
 
     protected abstract double speedFactor();
     // Varje biltyp har sin egen acceleration → därför abstract.
 
-    // === Skyddade metoder för hastighetsändring ===
+    // Skyddade metoder för hastighetsändring 
 
     protected void incrementSpeed(double amount) {
         // Ökar hastigheten men aldrig över enginePower
