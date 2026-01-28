@@ -12,7 +12,7 @@ class Volvo240Test {
         @Test
         void getNrDoors() 
         {
-        assertEquals(2, volvo240.getNrDoors());
+        assertEquals(4, volvo240.getNrDoors());
         }
         @Test
         void getEnginePower() 
