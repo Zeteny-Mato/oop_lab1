@@ -36,7 +36,71 @@ class Volvo240Test {
         {
             assertEquals("Volvo240", volvo240.getModelName());
         }
-    
+
+        @Test
+        void startEngine() 
+        {
+            volvo240.startEngine();
+            assertEquals(0.1, volvo240.getCurrentSpeed());
+        }
+
+        @Test
+        void stopEngine() 
+        {
+            volvo240.startEngine();
+            volvo240.stopEngine();
+            assertEquals(0, volvo240.getCurrentSpeed());
+        }
+
+        @Test
+        void gas()
+        {
+            volvo240.startEngine();
+            volvo240.gas(1);
+            assertTrue(volvo240.getCurrentSpeed() > 0.1);
+        }
+
+        @Test
+        void brake()
+        {
+            volvo240.startEngine();
+            volvo240.gas(1);
+            double before = volvo240.getCurrentSpeed();
+            volvo240.brake(1);
+            assertTrue(volvo240.getCurrentSpeed() < before);
+        }
+
+        @Test
+        void speedFactor()
+        {
+            double expected = volvo240.getEnginePower() * 0.01 * 1.25;
+            assertEquals(expected, volvo240.speedFactor());
+        }
+
+        @Test
+        void move()
+        {
+            volvo240.startEngine();
+            double beforeY = volvo240.getY();
+            volvo240.move();
+            assertTrue(volvo240.getY() > beforeY);
+        }
+
+        @Test
+        void turnLeft()
+        {
+            int before = volvo240.getDirection();
+            volvo240.turnLeft();
+            assertEquals((before + 3) % 4, volvo240.direction);
+        }
+
+        @Test
+        void turnRight()
+        {
+            int before = volvo240.getDirection();
+            volvo240.turnRight();
+            assertEquals((before + 1) % 4, volvo240.direction);
+        }
 }
       
         
