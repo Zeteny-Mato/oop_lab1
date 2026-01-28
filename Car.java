@@ -48,6 +48,18 @@ public abstract class Car implements Movable {
         return modelName;                 // Returnerar modellnamnet
     }
 
+    protected int getDirection() {
+        return direction;                 // Returnerar bilens riktning
+    }
+
+    protected double getY() {
+        return y;                         // Returnerar bilens Y-position
+    }
+
+    protected double getX() {
+        return x;                         // Returnerar bilens X-position
+    }
+
     protected void setColor(Color clr) {
         color = clr;                      // Tillåter användaren att ändra färg
     }
