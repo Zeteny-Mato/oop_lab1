@@ -81,23 +81,23 @@ public class Saab95{
 */
 
 public class Saab95 extends Car {
-    private boolean turboOn; // Turbo status
+    protected boolean turboOn; // Turbo status
 
     public Saab95() {
         super(2, 125, Color.red, "Saab95"); // Anropar baskonstruktorn
         turboOn = false;                    // Turbo är avstängd som standard
     }
 
-    public void setTurboOn() {
+    protected void setTurboOn() {
         turboOn = true;                     // Sätter turbo på
     }
 
-    public void setTurboOff() {
+    protected void setTurboOff() {
         turboOn = false;                    // Sätter turbo av
     }
 
     @Override
-    public double speedFactor() {
+    protected double speedFactor() {
         double turbo = turboOn ? 1.3 : 1.0; // Turbo påverkar speedFactor
         return getEnginePower() * 0.01 * turbo;
     }

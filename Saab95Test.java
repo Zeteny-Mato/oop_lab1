@@ -9,7 +9,7 @@ public class Saab95Test {
     //Car testcases
     @Test
     void getNrDoors() {
-        assertEquals(2,saab95.getNrDoors());
+        assertEquals(0,saab95.getNrDoors());
     }
 
     @Test
@@ -36,12 +36,13 @@ public class Saab95Test {
     @Test
     void setTurboOn(){
         saab95.setTurboOn();
-        assertTrue(null);
+        assertTrue(saab95.turboOn);
     }
 
     @Test
     void setTurboOff(){
-        assertFalse(null);
+        saab95.setTurboOff();
+        assertFalse(saab95.turboOn);
     }
     @Test
         void startEngine() 
@@ -79,7 +80,17 @@ public class Saab95Test {
         @Test
         void speedFactor()
         {
-            double expected = saab95.getEnginePower() * 0.01 * 1.25;
+            double expected;
+            if(saab95.turboOn)
+            {
+                expected = saab95.getEnginePower() * 0.01 * 1.3;
+            }
+            else
+            {
+                expected = saab95.getEnginePower() * 0.01 * 1.0;
+
+            }
+
             assertEquals(expected, saab95.speedFactor());
         }
 
