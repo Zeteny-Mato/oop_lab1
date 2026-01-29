@@ -70,14 +70,14 @@ public class Volvo240{
     */
 
 public class Volvo240 extends Car {
-    private final double trimFactor = 1.25; // Trimfaktor för Volvo240
+    protected final double trimFactor = 1.25; // Trimfaktor för Volvo240
 
     public Volvo240() {
         super(4, 100, Color.pink, "Volvo240"); // Anropar baskonstruktorn
     }
 
     @Override
-    public double speedFactor() {
+    protected double speedFactor() {
         return getEnginePower() * 0.01 * trimFactor; // Beräknar speedFactor
     }
 }
