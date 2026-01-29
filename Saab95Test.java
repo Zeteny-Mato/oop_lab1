@@ -43,5 +43,70 @@ public class Saab95Test {
     void setTurboOff(){
         assertFalse(null);
     }
+    @Test
+        void startEngine() 
+        {
+            saab95.startEngine();
+            assertEquals(0.1, saab95.getCurrentSpeed());
+        }
 
+        @Test
+        void stopEngine() 
+        {
+            saab95.startEngine();
+            saab95.stopEngine();
+            assertEquals(0, saab95.getCurrentSpeed());
+        }
+
+        @Test
+        void gas()
+        {
+            saab95.startEngine();
+            saab95.gas(1);
+            assertTrue(saab95.getCurrentSpeed() > 0.1);
+        }
+
+        @Test
+        void brake()
+        {
+            saab95.startEngine();
+            saab95.gas(1);
+            double before = saab95.getCurrentSpeed();
+            saab95.brake(1);
+            assertTrue(saab95.getCurrentSpeed() < before);
+        }
+
+        @Test
+        void speedFactor()
+        {
+            double expected = saab95.getEnginePower() * 0.01 * 1.25;
+            assertEquals(expected, saab95.speedFactor());
+        }
+
+        @Test
+        void move()
+        {
+            saab95.startEngine();
+            double beforeY = saab95.getY();
+            saab95.move();
+            assertTrue(saab95.getY() > beforeY);
+        }
+
+        @Test
+        void turnLeft()
+        {
+            int before = saab95.getDirection();
+            saab95.turnLeft();
+            assertEquals((before + 3) % 4, saab95.direction);
+        }
+
+        @Test
+        void turnRight()
+        {
+            int before = saab95.getDirection();
+            saab95.turnRight();
+            assertEquals((before + 1) % 4, saab95.direction);
+        }
 }
+
+
